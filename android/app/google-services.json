@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "432495020354",
+    "project_id": "calebetropical3",
+    "storage_bucket": "calebetropical3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432495020354:android:a5e96797c4da93b7df20db",
+        "android_client_info": {
+          "package_name": "com.walysson.calebe2023"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432495020354-96ip973mie09hed48hdresu66acau5es.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0e-m-fgf1p4MldoyvLPSgqklv4ttJq3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432495020354-96ip973mie09hed48hdresu66acau5es.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
