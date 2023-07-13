@@ -8,7 +8,7 @@ import 'package:calebe2023/app/modules/equipe_rumo_ao_ceu/rumo_ao_ceu_home_page.
 import 'package:flutter_modular/flutter_modular.dart';
 
 
-import '../../../services/cloudfirestore/firebasemodule.dart';
+
 
 
 
@@ -22,10 +22,10 @@ class RumoAoCeuModule extends Module {
   final List<ModularRoute> routes = [
 
 
-    ChildRoute('/', child: (_, __) => RumoAoCeuHomePage()),
-    ChildRoute('/lista_membros', child: (_, __) => ListaMembrosRumoAoCeu()),
-    ChildRoute('/pontuacao', child: (_, __) => PontuacaoPageRumoAoCeu()),
-    ChildRoute('/registro_pontuacao', child: (_, __) => RegistroPontuacaoPageRumoAoCeu()),
-    ChildRoute('/cadastro_membro', child: (_, __) => CadastroMembrosRumoAoCeu()),
+    ChildRoute('/', child: (_, __) => RumoAoCeuHomePage(),transition: TransitionType.rightToLeft),
+    ChildRoute('/lista_membros', child: (_, __) => ListaMembrosRumoAoCeu(),transition: TransitionType.downToUp),
+    ChildRoute('/pontuacao', child: (_, __) => PontuacaoPageRumoAoCeu(),transition: TransitionType.rotate),
+    ChildRoute('/registro_pontuacao', child: (_, __) => RegistroPontuacaoPageRumoAoCeu(),transition: TransitionType.fadeIn),
+    ChildRoute('/cadastro_membro', child: (_, __) => CadastroMembrosRumoAoCeu(),transition: TransitionType.rightToLeftWithFade),
   ];
 }

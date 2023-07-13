@@ -1,19 +1,21 @@
-import 'package:calebe2023/app/modules/equipe_rumo_ao_ceu/controller/rumo_ao_ceu_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../home_module/controller/home_controller.dart';
+import 'controller/os_guerreiros_controller.dart';
 
-class RumoAoCeuHomePage extends StatefulWidget {
-  const RumoAoCeuHomePage({Key? key}) : super(key: key);
+
+class OsGuerreirosHomePage extends StatefulWidget {
+  const OsGuerreirosHomePage({Key? key}) : super(key: key);
 
   @override
-  State<RumoAoCeuHomePage> createState() => _RumoAoCeuHomePageState();
+  State<OsGuerreirosHomePage> createState() => _OsGuerreirosHomePageState();
 }
 
-class _RumoAoCeuHomePageState extends State<RumoAoCeuHomePage> {
-
-  final controller = Modular.get<RumoAoCeuController>();
+class _OsGuerreirosHomePageState extends State<OsGuerreirosHomePage> {
+  final controller = Modular.get<OsGuerreirosController>();
+  final controller2 = HomeController();
   @override
   void initState() {
     super.initState();
@@ -21,9 +23,16 @@ class _RumoAoCeuHomePageState extends State<RumoAoCeuHomePage> {
     print('olaaaaaaaaaaaaaaaa');
   }
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+   // controller2.carregarPontuacoes();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
     final largura = MediaQuery.of(context).size.width;
+    final themeData = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         foregroundColor: themeData.secondaryHeaderColor,
@@ -31,21 +40,24 @@ class _RumoAoCeuHomePageState extends State<RumoAoCeuHomePage> {
         title: Observer(
           builder: (_) {
             final pontuacao = controller.pontuacao;
-            return Text('Pontuação Rumo ao céu: $pontuacao');
+            return Text('Pontuação dos Guerreiros: $pontuacao',style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: themeData.secondaryHeaderColor
+            ),);
           },
         ),
       ),
       body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          //crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width:  largura - 100,
+              width: largura -100,
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  Modular.to.pushNamed('/rumo_ao_ceu/lista_membros');
+                  Modular.to.pushNamed('/equipe1/lista_membros');
                 },
                 child: Text('Lista de membros'),
                 style: ElevatedButton.styleFrom(
@@ -58,12 +70,12 @@ class _RumoAoCeuHomePageState extends State<RumoAoCeuHomePage> {
             ),
             SizedBox(height: 16),
             SizedBox(
-              width:  largura - 100,
+              width: largura -100,
               height: 50,
               child: ElevatedButton(
-                onPressed: () async {
-                   Modular.to.pushNamed('/rumo_ao_ceu/registro_pontuacao');
-                  controller.consultaPontuacao();
+                onPressed: ()  async{
+                   Modular.to.pushNamed('/equipe1/registro_pontuacao');
+                  await controller.consultaPontuacao();
                   setState(() {});
                 },
                 child: Text('Adicionar pontuação'),
@@ -77,11 +89,11 @@ class _RumoAoCeuHomePageState extends State<RumoAoCeuHomePage> {
             ),
             SizedBox(height: 16),
             SizedBox(
-              width:  largura - 100,
+              width: largura -100,
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  Modular.to.pushNamed('/rumo_ao_ceu/pontuacao');
+                  Modular.to.pushNamed('/equipe1/pontuacao');
                 },
                 child: Text('Registro das pontuações'),
                 style: ElevatedButton.styleFrom(

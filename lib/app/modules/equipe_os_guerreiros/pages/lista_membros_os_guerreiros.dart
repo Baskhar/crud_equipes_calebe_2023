@@ -2,39 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../controller/equipe1_controller.dart';
+import '../controller/os_guerreiros_controller.dart';
 
-class ListaMembrosEquipe1 extends StatefulWidget {
-  const ListaMembrosEquipe1({Key? key}) : super(key: key);
+class ListaMembrosOsGuerreiros extends StatefulWidget {
+  const ListaMembrosOsGuerreiros({Key? key}) : super(key: key);
 
   @override
-  State<ListaMembrosEquipe1> createState() => _ListaMembrosEquipe1State();
+  State<ListaMembrosOsGuerreiros> createState() => _ListaMembrosOsGuerreirosState();
 }
 
-class _ListaMembrosEquipe1State extends State<ListaMembrosEquipe1> {
-  final controller = Modular.get<Equipe1Controller>();
+class _ListaMembrosOsGuerreirosState extends State<ListaMembrosOsGuerreiros> {
+  final controller = Modular.get<OsGuerreirosController>();
 
   @override
   void initState() {
     super.initState();
-    controller.listaEquipe1();
+    controller.listaOsGuerreiros();
   }
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: themeData.secondaryHeaderColor,
+
         centerTitle: true,
         actions: [
           IconButton(
             onPressed: () async {
               await Navigator.pushNamed(context, '/equipe1/cadastro_membro');
-              controller.listaEquipe1();
+              controller.listaOsGuerreiros();
             },
             icon: Icon(Icons.add),
           ),
         ],
-        title: Text('Lista de Membros'),
+        title: Text('Lista de Membros',style: TextStyle(
+          color: themeData.secondaryHeaderColor,
+          fontWeight: FontWeight.bold,
+        ),),
       ),
       body: Observer(
         builder: (context) {
@@ -109,53 +115,59 @@ class _ListaMembrosEquipe1State extends State<ListaMembrosEquipe1> {
                       },
                     );
                   },
-                  child: ListTile(
-                    title: Text(
-                      member,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 5.0,bottom: 5.0),
+                    child: ListTile(
+                      shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            String novoNome = ''; // Variável para armazenar o novo nome
+                      title: Text(
+                        member,
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              String novoNome = ''; // Variável para armazenar o novo nome
 
-                            return AlertDialog(
-                              title: Text('Editar Membro'),
-                              content: TextFormField(
-                                onChanged: (value) {
-                                  novoNome = value; // Atualiza o novo nome conforme o usuário digita
-                                },
-                                decoration: InputDecoration(labelText: 'Novo Nome'),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop(); // Fecha o diálogo
+                              return AlertDialog(
+                                title: Text('Editar Membro'),
+                                content: TextFormField(
+                                  onChanged: (value) {
+                                    novoNome = value; // Atualiza o novo nome conforme o usuário digita
                                   },
-                                  child: Text('Cancelar'),
+                                  decoration: InputDecoration(labelText: 'Novo Nome'),
                                 ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop(); // Fecha o diálogo
-                                    controller.editarMembro(index: index, novoNome: novoNome); // Chama a função para editar o membro
-                                  },
-                                  child: Text('Confirmar'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop(); // Fecha o diálogo
+                                    },
+                                    child: Text('Cancelar'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop(); // Fecha o diálogo
+                                      controller.editarMembro(index: index, novoNome: novoNome); // Chama a função para editar o membro
+                                    },
+                                    child: Text('Confirmar'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                      ),
+                      onTap: () {
+                        // Ação ao clicar no membro
                       },
                     ),
-                    onTap: () {
-                      // Ação ao clicar no membro
-                    },
                   ),
                 );
               },

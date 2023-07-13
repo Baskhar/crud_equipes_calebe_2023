@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:mobx/mobx.dart';
 
-part 'equipe1_controller.g.dart';
+part 'os_guerreiros_controller.g.dart';
 
-class Equipe1Controller = _Equipe1Controller with _$Equipe1Controller;
-abstract class _Equipe1Controller with Store{
+class OsGuerreirosController = _OsGuerreirosController with _$OsGuerreirosController;
+abstract class _OsGuerreirosController with Store{
   //final FirebaseFirestore firestore = Modular.get<FirebaseFirestore>();
   final firestore = FirebaseFirestore.instance;
   @observable
@@ -16,7 +16,7 @@ abstract class _Equipe1Controller with Store{
   @computed
   int get getPontuacao => pontuacao;
 
-  _Equipe1Controller() {
+  _OsGuerreirosController() {
     _init();
   }
 
@@ -42,13 +42,13 @@ abstract class _Equipe1Controller with Store{
 
     try {
       final DocumentSnapshot<Map<String, dynamic>> snapshot =
-      await firestore.collection('equipes').doc('equipe1').get();
+      await firestore.collection('equipes').doc('os_guerreiros').get();
 
       final List<dynamic> membros = snapshot.data()?['membros'];
 
       membros.add(nome);
 
-      await firestore.collection('equipes').doc('equipe1').update({
+      await firestore.collection('equipes').doc('os_guerreiros').update({
         'membros': membros,
       });
 
@@ -58,11 +58,11 @@ abstract class _Equipe1Controller with Store{
     }
   }
   @action
-  Future<void> listaEquipe1() async {
+  Future<void> listaOsGuerreiros() async {
     loading = true;
     try {
       final snapshot =
-      await firestore.collection('equipes').doc('equipe1').get();
+      await firestore.collection('equipes').doc('os_guerreiros').get();
       final membrosData = snapshot.data()?['membros'] as List<dynamic>?;
       membros = ObservableList<String>.of(
           membrosData?.map<String>((membro) => membro.toString()) ?? []);
@@ -78,11 +78,11 @@ abstract class _Equipe1Controller with Store{
   Future<void> editarMembro({required int index, required String novoNome}) async {
     loading = true;
     try {
-      final snapshot = await firestore.collection('equipes').doc('equipe1').get();
+      final snapshot = await firestore.collection('equipes').doc('os_guerreiros').get();
       final membrosData = snapshot.data()?['membros'] as List<dynamic>?;
       if (membrosData != null) {
         membrosData[index] = novoNome;
-        await firestore.collection('equipes').doc('equipe1').update({'membros': membrosData});
+        await firestore.collection('equipes').doc('os_guerreiros').update({'membros': membrosData});
         membros[index] = novoNome;
       }
       error = false;
@@ -101,13 +101,13 @@ abstract class _Equipe1Controller with Store{
   @action
   Future<void> inserirPontuacao({required int pontuacao}) async {
     try {
-      final equipe1Ref = firestore.collection('equipes').doc('equipe1');
+      final osGuerreirosRef = firestore.collection('equipes').doc('os_guerreiros');
 
       await firestore.runTransaction((transaction) async {
-        final snapshot = await transaction.get(equipe1Ref);
+        final snapshot = await transaction.get(osGuerreirosRef);
         final existingPontuacao = snapshot.data()?['pontuacao'] ?? 0;
         final newPontuacao = existingPontuacao + pontuacao;
-        transaction.update(equipe1Ref, {'pontuacao': newPontuacao});
+        transaction.update(osGuerreirosRef, {'pontuacao': newPontuacao});
       });
 
       print('Pontuação atualizada com sucesso');
@@ -121,7 +121,7 @@ abstract class _Equipe1Controller with Store{
   Future<void> consultaPontuacao() async {
     try {
       final DocumentSnapshot<Map<String, dynamic>> snapshot =
-      await firestore.collection('equipes').doc('equipe1').get();
+      await firestore.collection('equipes').doc('os_guerreiros').get();
       final pontuacao = snapshot.data()?['pontuacao'];
       this.pontuacao = pontuacao ?? 0;
     } catch (e) {
@@ -134,7 +134,7 @@ abstract class _Equipe1Controller with Store{
   Future<void> registroPontuacao({required int ponto,required String data,required String detalhes}) async {
     try {
       final DocumentSnapshot<Map<String, dynamic>> snapshot =
-      await firestore.collection('equipes').doc('equipe1').get();
+      await firestore.collection('equipes').doc('os_guerreiros').get();
 
       final List<dynamic> registros = snapshot.data()?['registros'];
 
@@ -144,7 +144,7 @@ abstract class _Equipe1Controller with Store{
         'detalhes': detalhes,
       });
 
-      await firestore.collection('equipes').doc('equipe1').update({
+      await firestore.collection('equipes').doc('os_guerreiros').update({
         'registros': registros,
       });
 
@@ -155,8 +155,8 @@ abstract class _Equipe1Controller with Store{
   }
   Future<List<Map<String, dynamic>>> getPontuacoes() async {
     try {
-      final equipe1Ref = firestore.collection('equipes').doc('equipe1');
-      final snapshot = await equipe1Ref.get();
+      final osGuerreirosRef = firestore.collection('equipes').doc('os_guerreiros');
+      final snapshot = await osGuerreirosRef.get();
 
       if (snapshot.exists) {
         final data = snapshot.data();
@@ -179,13 +179,13 @@ abstract class _Equipe1Controller with Store{
   @action
   Future<void> removerMembro({required String nome}) async {
     try {
-      final equipe1Ref = firestore.collection('equipes').doc('equipe1');
+      final osGuerreirosRef = firestore.collection('equipes').doc('os_guerreiros');
 
       await firestore.runTransaction((transaction) async {
-        final snapshot = await transaction.get(equipe1Ref);
+        final snapshot = await transaction.get(osGuerreirosRef);
         final membros = snapshot.data()?['membros'] as List<dynamic>?;
         membros?.remove(nome);
-        transaction.update(equipe1Ref, {'membros': membros});
+        transaction.update(osGuerreirosRef, {'membros': membros});
       });
 
       print('Membro removido com sucesso');
