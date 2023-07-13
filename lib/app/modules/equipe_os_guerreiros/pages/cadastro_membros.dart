@@ -1,17 +1,17 @@
-import 'package:calebe2023/app/modules/equipe_rumo_ao_ceu/controller/rumo_ao_ceu_controller.dart';
 import 'package:flutter/material.dart';
+import '../controller/os_guerreiros_controller.dart';
 
-class CadastroMembrosRumoAoCeu extends StatefulWidget {
-  const CadastroMembrosRumoAoCeu({Key? key}) : super(key: key);
+class CadastroMembrosOsGuerreiros extends StatefulWidget {
+  const CadastroMembrosOsGuerreiros({Key? key}) : super(key: key);
 
   @override
-  _CadastroMembrosRumoAoCeuState createState() => _CadastroMembrosRumoAoCeuState();
+  _CadastroMembrosOsGuerreirosState createState() => _CadastroMembrosOsGuerreirosState();
 }
 
-class _CadastroMembrosRumoAoCeuState extends State<CadastroMembrosRumoAoCeu> {
+class _CadastroMembrosOsGuerreirosState extends State<CadastroMembrosOsGuerreiros> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nomeController = TextEditingController();
-  final controller = RumoAoCeuController();
+  final controller = OsGuerreirosController();
 
   @override
   void dispose() {
@@ -26,7 +26,7 @@ class _CadastroMembrosRumoAoCeuState extends State<CadastroMembrosRumoAoCeu> {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: themeData.secondaryHeaderColor,
-        title: const Text('Cadastro de Membros - Rumo ao céu',style: TextStyle(
+        title: const Text('Cadastro de Membros - Os guerreiros',style: TextStyle(
           fontWeight: FontWeight.bold,
         ),),
       ),

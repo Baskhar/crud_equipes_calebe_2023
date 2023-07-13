@@ -23,8 +23,10 @@ class _ListaMembrosRumoAoCeuState extends State<ListaMembrosRumoAoCeu> {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: themeData.secondaryHeaderColor,
         centerTitle: true,
         actions: [
           IconButton(
@@ -110,53 +112,59 @@ class _ListaMembrosRumoAoCeuState extends State<ListaMembrosRumoAoCeu> {
                       },
                     );
                   },
-                  child: ListTile(
-                    title: Text(
-                      member,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 5.0,bottom: 5.0),
+                    child: ListTile(
+                      shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            String novoNome = ''; // Variável para armazenar o novo nome
+                      title: Text(
+                        member,
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              String novoNome = ''; // Variável para armazenar o novo nome
 
-                            return AlertDialog(
-                              title: Text('Editar Membro'),
-                              content: TextFormField(
-                                onChanged: (value) {
-                                  novoNome = value; // Atualiza o novo nome conforme o usuário digita
-                                },
-                                decoration: InputDecoration(labelText: 'Novo Nome'),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop(); // Fecha o diálogo
+                              return AlertDialog(
+                                title: Text('Editar Membro'),
+                                content: TextFormField(
+                                  onChanged: (value) {
+                                    novoNome = value; // Atualiza o novo nome conforme o usuário digita
                                   },
-                                  child: Text('Cancelar'),
+                                  decoration: InputDecoration(labelText: 'Novo Nome'),
                                 ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop(); // Fecha o diálogo
-                                    controller.editarMembro(index: index, novoNome: novoNome); // Chama a função para editar o membro
-                                  },
-                                  child: Text('Confirmar'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop(); // Fecha o diálogo
+                                    },
+                                    child: Text('Cancelar'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop(); // Fecha o diálogo
+                                      controller.editarMembro(index: index, novoNome: novoNome); // Chama a função para editar o membro
+                                    },
+                                    child: Text('Confirmar'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                      ),
+                      onTap: () {
+                        // Ação ao clicar no membro
                       },
                     ),
-                    onTap: () {
-                      // Ação ao clicar no membro
-                    },
                   ),
                 );
               },

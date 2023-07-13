@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:mobx/mobx.dart';
 
 part 'rumo_ao_ceu_controller.g.dart';

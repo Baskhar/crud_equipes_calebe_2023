@@ -1,14 +1,17 @@
 import 'package:calebe2023/app/modules/equipe_rumo_ao_ceu/controller/rumo_ao_ceu_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:calebe2023/app/modules/equipe1/controller/equipe1_controller.dart';
+
 
 class PontuacaoPageRumoAoCeu extends StatelessWidget {
   final controller = RumoAoCeuController();
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        foregroundColor: themeData.secondaryHeaderColor,
         title: const Text('Pontuações'),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
@@ -35,6 +38,7 @@ class PontuacaoPageRumoAoCeu extends StatelessWidget {
                   final detalhes = pontuacao['detalhes'];
 
                   return Card(
+                    color: themeData.primaryColor,
                     elevation: 2,
                     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: ListTile(
@@ -45,9 +49,13 @@ class PontuacaoPageRumoAoCeu extends StatelessWidget {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Data: $data'),
+                          Text('Data: $data',style: TextStyle(
+                              color: Colors.black
+                          ),),
                           const SizedBox(height: 4),
-                          Text('Detalhes: $detalhes'),
+                          Text('Detalhes: $detalhes',style: TextStyle(
+                              color: Colors.black
+                          ),),
                         ],
                       ),
                     ),

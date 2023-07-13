@@ -1,7 +1,8 @@
 import 'package:calebe2023/app/modules/equipe_rumo_ao_ceu/controller/rumo_ao_ceu_controller.dart';
 import 'package:datetime_picker_formfield_new/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
+
 
 import 'package:intl/intl.dart';
 
@@ -35,7 +36,12 @@ class _RegistroPontuacaoPageRumoAoCeuState extends State<RegistroPontuacaoPageRu
   Future<void> atualiza()async{
    await  controller.consultaPontuacao();
   }
+
+
   void _showDateTimePicker() {
+
+
+
     showDialog(
       context: context,
       builder: (context) {
@@ -44,7 +50,7 @@ class _RegistroPontuacaoPageRumoAoCeuState extends State<RegistroPontuacaoPageRu
         return AlertDialog(
           title: const Text('Selecione a data'),
           content: DateTimeField(
-            format: DateFormat('yyyy-MM-dd HH:mm'),
+            format: DateFormat('dd/MM/yyyy HH:mm', 'pt_BR'),
             onShowPicker: (context, currentValue) async {
               final date = await showDatePicker(
                 context: context,
@@ -77,20 +83,36 @@ class _RegistroPontuacaoPageRumoAoCeuState extends State<RegistroPontuacaoPageRu
           actions: [
             ElevatedButton(
               onPressed: () {
+
                 Navigator.of(context).pop();
               },
               child: const Text('Fechar'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF068b9c),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
             ),
             ElevatedButton(
               onPressed: () {
                 if (selectedDate != null) {
                   setState(() {
-                    _dataController.text = DateFormat('yyyy-MM-dd HH:mm').format(selectedDate!);
+                    _dataController.text = DateFormat('dd/MM/yyyy HH:mm', 'pt_BR').format(selectedDate!);
+
+
+
                   });
                 }
                 Navigator.of(context).pop();
               },
               child: const Text('Selecionar'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF068b9c),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
             ),
           ],
         );
@@ -98,11 +120,14 @@ class _RegistroPontuacaoPageRumoAoCeuState extends State<RegistroPontuacaoPageRu
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+    final largura = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        foregroundColor: themeData.secondaryHeaderColor,
         title: const Text('Registro de Pontuação'),
       ),
       body: SingleChildScrollView(
@@ -111,7 +136,7 @@ class _RegistroPontuacaoPageRumoAoCeuState extends State<RegistroPontuacaoPageRu
           child: Form(
             key: _formKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextFormField(
                   controller: _pontuacaoController,
@@ -128,6 +153,7 @@ class _RegistroPontuacaoPageRumoAoCeuState extends State<RegistroPontuacaoPageRu
                   },
                   decoration: const InputDecoration(
                     labelText: 'Pontuação',
+                    border: OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -143,6 +169,7 @@ class _RegistroPontuacaoPageRumoAoCeuState extends State<RegistroPontuacaoPageRu
                   },
                   decoration: const InputDecoration(
                     labelText: 'Data',
+                    border: OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -156,34 +183,45 @@ class _RegistroPontuacaoPageRumoAoCeuState extends State<RegistroPontuacaoPageRu
                   },
                   decoration: const InputDecoration(
                     labelText: 'Detalhes',
+                    border: OutlineInputBorder(),
                   ),
                 ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: ()async {
-                    if (_formKey.currentState!.validate()) {
-                      final pontuacao = int.parse(_pontuacaoController.text);
-                      final data = _dataController.text;
-                      final detalhes = _detalhesController.text;
+                const SizedBox(height: 30),
+                SizedBox(
+                  height: 50,
+                  width: largura -100,
+                  child: ElevatedButton(
+                    onPressed: ()async {
+                      if (_formKey.currentState!.validate()) {
+                        final pontuacao = int.parse(_pontuacaoController.text);
+                        final data = _dataController.text;
+                        final detalhes = _detalhesController.text;
 
-                      // Chamar as funções de inserirPontuacao e registroPontuacao
-                      controller.inserirPontuacao(pontuacao: pontuacao);
-                      controller.registroPontuacao(data: data, detalhes: detalhes, ponto: pontuacao);
+                        // Chamar as funções de inserirPontuacao e registroPontuacao
+                        controller.inserirPontuacao(pontuacao: pontuacao);
+                        controller.registroPontuacao(data: data, detalhes: detalhes, ponto: pontuacao);
 
-                      // Limpar os campos
-                      _pontuacaoController.clear();
-                      _dataController.clear();
-                      _detalhesController.clear();
-                      //Modular.to.popUntil(ModalRoute.withName('/equipe1'));
-                      // await  controller.consultaPontuacao();
-                      // if (pontuacao != null) {
-                      //   // Retornar a pontuação para a página anterior
-                      //   controller.atualizarPontuacaoGlobal(pontuacao);
-                      //   Modular.to.pop();
-                      // }
-                    }
-                  },
-                  child: const Text('Enviar'),
+                        // Limpar os campos
+                        _pontuacaoController.clear();
+                        _dataController.clear();
+                        _detalhesController.clear();
+                        //Modular.to.popUntil(ModalRoute.withName('/equipe1'));
+                        // await  controller.consultaPontuacao();
+                        // if (pontuacao != null) {
+                        //   // Retornar a pontuação para a página anterior
+                        //   controller.atualizarPontuacaoGlobal(pontuacao);
+                        //   Modular.to.pop();
+                        // }
+                      }
+                    },
+                    child: const Text('Enviar'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: themeData.primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

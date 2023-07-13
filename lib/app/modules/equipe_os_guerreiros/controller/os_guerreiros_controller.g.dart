@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'equipe1_controller.dart';
+part of 'os_guerreiros_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,17 +8,17 @@ part of 'equipe1_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$Equipe1Controller on _Equipe1Controller, Store {
+mixin _$OsGuerreirosController on _OsGuerreirosController, Store {
   Computed<int>? _$getPontuacaoComputed;
 
   @override
   int get getPontuacao =>
       (_$getPontuacaoComputed ??= Computed<int>(() => super.getPontuacao,
-              name: '_Equipe1Controller.getPontuacao'))
+              name: '_OsGuerreirosController.getPontuacao'))
           .value;
 
   late final _$pontuacaoAtom =
-      Atom(name: '_Equipe1Controller.pontuacao', context: context);
+      Atom(name: '_OsGuerreirosController.pontuacao', context: context);
 
   @override
   int get pontuacao {
@@ -34,7 +34,7 @@ mixin _$Equipe1Controller on _Equipe1Controller, Store {
   }
 
   late final _$membrosAtom =
-      Atom(name: '_Equipe1Controller.membros', context: context);
+      Atom(name: '_OsGuerreirosController.membros', context: context);
 
   @override
   ObservableList<String> get membros {
@@ -50,7 +50,7 @@ mixin _$Equipe1Controller on _Equipe1Controller, Store {
   }
 
   late final _$loadingAtom =
-      Atom(name: '_Equipe1Controller.loading', context: context);
+      Atom(name: '_OsGuerreirosController.loading', context: context);
 
   @override
   bool get loading {
@@ -66,7 +66,7 @@ mixin _$Equipe1Controller on _Equipe1Controller, Store {
   }
 
   late final _$errorAtom =
-      Atom(name: '_Equipe1Controller.error', context: context);
+      Atom(name: '_OsGuerreirosController.error', context: context);
 
   @override
   bool get error {
@@ -82,23 +82,24 @@ mixin _$Equipe1Controller on _Equipe1Controller, Store {
   }
 
   late final _$_initAsyncAction =
-      AsyncAction('_Equipe1Controller._init', context: context);
+      AsyncAction('_OsGuerreirosController._init', context: context);
 
   @override
   Future<void> _init() {
     return _$_initAsyncAction.run(() => super._init());
   }
 
-  late final _$listaEquipe1AsyncAction =
-      AsyncAction('_Equipe1Controller.listaEquipe1', context: context);
+  late final _$listaOsGuerreirosAsyncAction = AsyncAction(
+      '_OsGuerreirosController.listaOsGuerreiros',
+      context: context);
 
   @override
-  Future<void> listaEquipe1() {
-    return _$listaEquipe1AsyncAction.run(() => super.listaEquipe1());
+  Future<void> listaOsGuerreiros() {
+    return _$listaOsGuerreirosAsyncAction.run(() => super.listaOsGuerreiros());
   }
 
   late final _$editarMembroAsyncAction =
-      AsyncAction('_Equipe1Controller.editarMembro', context: context);
+      AsyncAction('_OsGuerreirosController.editarMembro', context: context);
 
   @override
   Future<void> editarMembro({required int index, required String novoNome}) {
@@ -107,7 +108,7 @@ mixin _$Equipe1Controller on _Equipe1Controller, Store {
   }
 
   late final _$inserirPontuacaoAsyncAction =
-      AsyncAction('_Equipe1Controller.inserirPontuacao', context: context);
+      AsyncAction('_OsGuerreirosController.inserirPontuacao', context: context);
 
   @override
   Future<void> inserirPontuacao({required int pontuacao}) {
@@ -115,8 +116,9 @@ mixin _$Equipe1Controller on _Equipe1Controller, Store {
         .run(() => super.inserirPontuacao(pontuacao: pontuacao));
   }
 
-  late final _$consultaPontuacaoAsyncAction =
-      AsyncAction('_Equipe1Controller.consultaPontuacao', context: context);
+  late final _$consultaPontuacaoAsyncAction = AsyncAction(
+      '_OsGuerreirosController.consultaPontuacao',
+      context: context);
 
   @override
   Future<void> consultaPontuacao() {
@@ -124,7 +126,7 @@ mixin _$Equipe1Controller on _Equipe1Controller, Store {
   }
 
   late final _$removerMembroAsyncAction =
-      AsyncAction('_Equipe1Controller.removerMembro', context: context);
+      AsyncAction('_OsGuerreirosController.removerMembro', context: context);
 
   @override
   Future<void> removerMembro({required String nome}) {
